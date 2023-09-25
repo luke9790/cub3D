@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:01:20 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/08/28 11:01:58 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/09/19 09:41:14 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,18 @@ void	ft_init_texture(t_cub3d *box)
 			&box->east.w, &box->east.h);
 	box->west.img_ptr = mlx_xpm_file_to_image(box->mlx_ptr, box->path_to_west,
 			&box->west.w, &box->west.h);
+	//box->north.data = mlx_get_data_addr(box->north.img_ptr, &box->north.bpp,
+	//		&box->north.line_len, &box->north.endian);
+	//box->south.data = mlx_get_data_addr(box->south.img_ptr, &box->south.bpp,
+	//		&box->south.line_len, &box->south.endian);
+	//box->east.data = mlx_get_data_addr(box->east.img_ptr, &box->east.bpp,
+	//		&box->east.line_len, &box->east.endian);
+	//box->west.data = mlx_get_data_addr(box->west.img_ptr, &box->west.bpp,
+	//		&box->west.line_len, &box->west.endian);
+	//box->west.currenty = 0;
+	//box->east.currenty = 0;
+	//box->south.currenty = 0;
+	//box->north.currenty = 0;
 }
 
 /* creiamo la finestra dopo aver inizializzato. (tutte funzioni minilibx) */

@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:40:50 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/08/28 11:05:33 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:40:00 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,11 @@ void			ft_start(t_cub3d *box);
 void			ft_init_window(t_cub3d *box);
 // HANDLE_INPUTS
 int 			ft_handle_inputs(int input, t_cub3d *box);
-//SUBFUNCTIONS
+// SUBFUNCTIONS
 void			ft_parsing(t_cub3d *box, int tmp);
-//UTILS.c
+// COLORS
+unsigned int	ft_get_rgb(t_cub3d *box, char *s, int start);
+// UTILS
 void			ft_print_error(char *str, char **mappa);
 void			ft_free_map(char **mappa);
 int				ft_free_n_exit(t_cub3d *box);
@@ -97,5 +99,7 @@ int				ft_strncmp(char *s1, char *s2);
 char			*ft_strncpy(char *str, int start);
 void			ft_print_error_n_free(t_cub3d *box, char **mappa, char *str);
 void			ft_perror_exit(char *str);
+// UTILSMATH
+long			ft_atoi(const char *nptr);
 
 #endif

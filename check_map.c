@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:32:37 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/08/28 11:01:16 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/09/25 16:20:00 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,25 @@ void	ft_check_path(t_cub3d *box)
 
 	if (box->path_to_north == NULL || box->path_to_south == NULL
 		|| box->path_to_east == NULL || box->path_to_west == NULL)
-		ft_print_error_n_free(box, box->map, "Error\ntexture mancante\n");
+		ft_print_error_n_free(box, box->map, "Error\nTexture mancante\n");
 	fd = open(box->path_to_east, O_RDONLY);
 	if (fd < 0)
-		ft_print_error_n_free(box, box->map, "Error\ntexture EA non valida\n");
+		ft_print_error_n_free(box, box->map, "Error\nTexture EA non valida\n");
 	close (fd);
 	fd = open(box->path_to_west, O_RDONLY);
 	if (fd < 0)
-		ft_print_error_n_free(box, box->map, "Error\ntexture WE non valida\n");
+		ft_print_error_n_free(box, box->map, "Error\nTexture WE non valida\n");
 	close (fd);
 	fd = open(box->path_to_north, O_RDONLY);
 	if (fd < 0)
-		ft_print_error_n_free(box, box->map, "Error\ntexture NO non valida\n");
+		ft_print_error_n_free(box, box->map, "Error\nTexture NO non valida\n");
 	close (fd);
 	fd = open(box->path_to_south, O_RDONLY);
 	if (fd < 0)
-		ft_print_error_n_free(box, box->map, "Error\ntexture SO non valida\n");
+		ft_print_error_n_free(box, box->map, "Error\nTexture SO non valida\n");
 	close (fd);
 }
 
-unsigned int	ft_get_color(t_cub3d *box, char *s, int start)
-{
-	// da fare, bisogna convertire con atoi la stringa s (pescata dalla mappa) 
-	// che ha i valori rgb del pavimento e del cielo. Start e' il punto da
-	// dove inizia il nostro indice (ragionamento simile a ft_strncpy ma si 
-	// puo modificare come ci pare). La roba sotto e' per compilare per ora ma non 
-	// serve a nulla
-	unsigned int temp;
-
-	(void)s;
-
-	temp = box->i+1+start;
-
-	return(temp);
-}
 
 void	ft_checkwalls(t_cub3d *box)
 {
@@ -76,9 +61,9 @@ static void	ft_check_parameters(t_cub3d *box)
 	else if (ft_strncmp(box->map[box->j], "EA ") == 1)
 		box->path_to_east = ft_strncpy(box->map[box->j], 3);
 	else if (ft_strncmp(box->map[box->j], "F ") == 1)
-		box->floor_color = ft_get_color(box, box->map[box->j], 2);
+		box->floor_color = ft_get_rgb(box, box->map[box->j], 2);
 	else if (ft_strncmp(box->map[box->j], "C ") == 1)
-		box->sky_color = ft_get_color(box, box->map[box->j], 2);
+		box->sky_color = ft_get_rgb(box, box->map[box->j], 2);
 }
 
 /* adesso che abbiamo la mappa nel box, dobbiamo controllare se e' fatta bene.

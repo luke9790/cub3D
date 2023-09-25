@@ -6,13 +6,14 @@
 #    By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 10:08:45 by lmasetti          #+#    #+#              #
-#    Updated: 2023/08/28 10:52:15 by lmasetti         ###   ########.fr        #
+#    Updated: 2023/09/25 16:38:33 by lmasetti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = cub3d
 SRCS = main.c check_map.c  check_map2.c  init.c start.c utils.c utils2.c \
-	init_window.c handle_inputs.c
+	init_window.c handle_inputs.c createcolors.c utilsmath.c utilsminilibx.c \
+	raycasting.c rendering.c
 GNL_SRCS = gnl/get_next_line_utils.c gnl/get_next_line.c
 OBJS = $(addprefix objs/,$(SRCS:.c=.o)) $(addprefix objs/gnl/,$(notdir $(GNL_SRCS:.c=.o)))
 CC = cc
