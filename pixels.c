@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixels.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 16:22:59 by pcocci            #+#    #+#             */
-/*   Updated: 2023/09/29 16:08:27 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/04 16:59:29 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,8 @@ uint32_t    get_color(t_data *box, t_raycaster *rc)
 	return (extract_pixel_from_image(&box->textures.south,
 			rc->tex_x, rc->tex_y));
 }
+
+
+
+
+

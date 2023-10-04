@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:43:39 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/03 16:35:52 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/04 17:00:19 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,22 +131,76 @@ void	find_wall_height(t_raycaster *rc)
 		rc->draw_end = WIN_HEIGHT - 1;
 }
 
-void	find_wall_pixel(t_data *box, t_raycaster *rc)
+// void	find_wall_pixel(t_data *box, t_raycaster *rc)
+// {
+// 	if (!rc->side)
+// 		rc->wall_x = (int)box->player.y + rc->perp_wall_dist * rc->ray_dir_y;
+// 	else
+// 		rc->wall_x = (int)box->player.x + rc->perp_wall_dist * rc->ray_dir_x;
+// 	rc->wall_x -= floor(rc->wall_x);
+// 	rc->tex_x = (int)(rc->wall_x * (double)TEXTURE_WIDTH);
+// 	if (!rc->side && rc->ray_dir_x > 0)
+// 		rc->tex_x = TEXTURE_WIDTH - rc->tex_x - 1;
+// 	if (rc->side && rc->ray_dir_y < 0)
+// 		rc->tex_x = TEXTURE_WIDTH - rc->tex_x - 1;
+// 	rc->step = 1.0 * TEXTURE_HEIGHT / rc->line_height;
+// 	rc->tex_pos = (rc->draw_start - (WIN_HEIGHT / 2) + rc->line_height / 2)
+// 		* rc->step;
+// }
+
+// void find_wall_pixel(t_data *box, t_raycaster *rc)
+// {
+//     double wall_x;
+
+//     // Calculate the perpendicular distance from the camera to the wall
+//     if (!rc->side)
+//         wall_x = box->player.y + rc->perp_wall_dist * rc->ray_dir_y;
+//     else
+//         wall_x = box->player.x + rc->perp_wall_dist * rc->ray_dir_x;
+
+//     // Calculate the x-coordinate in the texture based on the perpendicular distance
+//     rc->wall_x = wall_x - floor(wall_x);  // Fractional part
+//     rc->tex_x = (int)(rc->wall_x * (double)TEXTURE_WIDTH);
+
+//     // Adjust the texture coordinate for different wall sides
+//     if ((!rc->side && rc->ray_dir_x > 0) || (rc->side && rc->ray_dir_y < 0))
+//         rc->tex_x = TEXTURE_WIDTH - rc->tex_x - 1;
+
+//     // Calculate the step for texture sampling
+//     rc->step = 1.0 * TEXTURE_HEIGHT / rc->line_height;
+
+//     // Initialize the texture sampling position
+//     rc->tex_pos = (rc->draw_start - (WIN_HEIGHT / 2) + rc->line_height / 2) * rc->step;
+// }
+
+void find_wall_pixel(t_data *box, t_raycaster *rc)
 {
-	if (!rc->side)
-		rc->wall_x = (int)box->player.y + rc->perp_wall_dist * rc->ray_dir_y;
-	else
-		rc->wall_x = (int)box->player.x + rc->perp_wall_dist * rc->ray_dir_x;
-	rc->wall_x -= floor(rc->wall_x);
-	rc->tex_x = (int)(rc->wall_x * (double)TEXTURE_WIDTH);
-	if (!rc->side && rc->ray_dir_x > 0)
-		rc->tex_x = TEXTURE_WIDTH - rc->tex_x - 1;
-	if (rc->side && rc->ray_dir_y < 0)
-		rc->tex_x = TEXTURE_WIDTH - rc->tex_x - 1;
-	rc->step = 1.0 * TEXTURE_HEIGHT / rc->line_height;
-	rc->tex_pos = (rc->draw_start - (WIN_HEIGHT / 2) + rc->line_height / 2)
-		* rc->step;
+    if (!rc->side)
+    {
+        rc->wall_x = box->player.y + rc->perp_wall_dist * rc->ray_dir_y;
+    }
+    else
+    {
+        rc->wall_x = box->player.x + rc->perp_wall_dist * rc->ray_dir_x;
+    }
+
+    rc->wall_x -= floor(rc->wall_x);
+    rc->tex_x = (int)(rc->wall_x * (double)TEXTURE_WIDTH);
+
+    if ((!rc->side && rc->ray_dir_x > 0) || (rc->side && rc->ray_dir_y < 0))
+    {
+        rc->tex_x = TEXTURE_WIDTH - rc->tex_x - 1;
+    }
+
+    rc->tex_x = abs(rc->tex_x);
+    rc->step = 1.0 * TEXTURE_HEIGHT / rc->line_height;
+    rc->tex_pos = (rc->draw_start - (WIN_HEIGHT / 2) + rc->line_height / 2) * rc->step;
 }
+
+
+
+
+
 
 
 void	ft_raycasting(t_data *box)
