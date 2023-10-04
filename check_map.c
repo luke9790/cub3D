@@ -3,95 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:32:37 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/09/25 16:20:00 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:33:32 by pcocci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* Apriamo e chiudiamo uno alla volta i percorsi copiati in precedenza dalle 
-mappe. Se mancano del tutto o non vengono aperti stampiamo errore e chiudiamo. */
-
-void	ft_check_path(t_cub3d *box)
+static size_t	get_line_last_idx(char *map_line)
 {
-	int	fd;
+	size_t	i;
 
-	if (box->path_to_north == NULL || box->path_to_south == NULL
-		|| box->path_to_east == NULL || box->path_to_west == NULL)
-		ft_print_error_n_free(box, box->map, "Error\nTexture mancante\n");
-	fd = open(box->path_to_east, O_RDONLY);
-	if (fd < 0)
-		ft_print_error_n_free(box, box->map, "Error\nTexture EA non valida\n");
-	close (fd);
-	fd = open(box->path_to_west, O_RDONLY);
-	if (fd < 0)
-		ft_print_error_n_free(box, box->map, "Error\nTexture WE non valida\n");
-	close (fd);
-	fd = open(box->path_to_north, O_RDONLY);
-	if (fd < 0)
-		ft_print_error_n_free(box, box->map, "Error\nTexture NO non valida\n");
-	close (fd);
-	fd = open(box->path_to_south, O_RDONLY);
-	if (fd < 0)
-		ft_print_error_n_free(box, box->map, "Error\nTexture SO non valida\n");
-	close (fd);
+	i = ft_strlen(map_line) - 1;
+	while (is_spaces(map_line[i]))
+		i--;
+	i++;
+	return (i);
 }
 
-
-void	ft_checkwalls(t_cub3d *box)
+static bool	valid_surroundings(char **map_part, size_t i, size_t j)
 {
-	// da fare, bisogna controllare che la mappa sia chiusa da muri
-	(void)box;
+	return (is_onstr(VALID_ELEMENT_SURROUNDING, map_part[i - 1][j - 1])
+				&& is_onstr(VALID_ELEMENT_SURROUNDING, map_part[i - 1][j])
+				&& is_onstr(VALID_ELEMENT_SURROUNDING, map_part[i - 1][j + 1])
+				&& is_onstr(VALID_ELEMENT_SURROUNDING, map_part[i][j - 1])
+				&& is_onstr(VALID_ELEMENT_SURROUNDING, map_part[i][j + 1])
+				&& is_onstr(VALID_ELEMENT_SURROUNDING, map_part[i + 1][j - 1])
+				&& is_onstr(VALID_ELEMENT_SURROUNDING, map_part[i + 1][j])
+				&& is_onstr(VALID_ELEMENT_SURROUNDING, map_part[i + 1][j + 1]));
 }
 
-// ci salviamo il percorso da dove caricare le texture e prendiamo i colori 
-// per cielo e pavimento.
-
-static void	ft_check_parameters(t_cub3d *box)
+static bool	valid_content(char **map_part)
 {
-	if (ft_strncmp(box->map[box->j], "NO ") == 1)
-		box->path_to_north = ft_strncpy(box->map[box->j], 3);
-	else if (ft_strncmp(box->map[box->j], "SO ") == 1)
-		box->path_to_south = ft_strncpy(box->map[box->j], 3);
-	else if (ft_strncmp(box->map[box->j], "WE ") == 1)
-		box->path_to_west = ft_strncpy(box->map[box->j], 3);
-	else if (ft_strncmp(box->map[box->j], "EA ") == 1)
-		box->path_to_east = ft_strncpy(box->map[box->j], 3);
-	else if (ft_strncmp(box->map[box->j], "F ") == 1)
-		box->floor_color = ft_get_rgb(box, box->map[box->j], 2);
-	else if (ft_strncmp(box->map[box->j], "C ") == 1)
-		box->sky_color = ft_get_rgb(box, box->map[box->j], 2);
-}
+	size_t	i;
+	size_t	j;
 
-/* adesso che abbiamo la mappa nel box, dobbiamo controllare se e' fatta bene.
-contiamo il numero di righe e con controlliamo se rispettano i parametri.
-Con i due check interni controlliamo la presenza dei path per le texture
-dei muri e se i colori di soffitto e pavimento sono validi.
-Il ciclo while in fondo serve per capire dove parte la mappa vera e propria.
-La parte finale serve per controllare che la mappa sia chiusa (muri) e 
-per il parsing della mappa */
-
-void	ft_check_map(t_cub3d *box)
-{
-	int	tmp;
-
-	box->i = 0;
-	box->j = 0;
-	box->number_of_rows = 0;
-	box->flag = 0;
-	while (box->map[box->j])
+	i = 1;
+	while (map_part[i + 1])
 	{
-		box->number_of_rows++;
-		ft_check_parameters(box);
-		box->j++;
+		j = 1;
+		while (map_part[i][j] && j < get_line_last_idx(map_part[i - 1])
+			&& j < get_line_last_idx(map_part[i + 1]))
+		{
+			if (is_onstr(VALID_INSIDE_MAP, map_part[i][j])
+				&& !valid_surroundings(map_part, i, j))
+				return (false);
+			j++;
+		}
+		while (map_part[i][j])
+		{
+			if (map_part[i][j] != '1')
+				return (false);
+			j++;
+		}
+		i++;
 	}
-	ft_check_path(box);
-	tmp = box->number_of_rows;
-	while ((box->map[tmp - 1][0] == ' '	|| box->map[tmp - 1][0] == '1'))
-		tmp--;
-	ft_checkwalls(box);
-	ft_parsing(box, tmp);
+	return (true);
+}
+
+static bool	has_walls(char **map)
+{
+	int	i;
+	int	j;
+
+	j = -1;
+	while (map[0][++j])
+		if (!is_onstr(" 1", map[0][j]))
+			return (false);
+	j = -1;
+	i = matrix_len(map) - 1;
+	while (map[i][++j])
+		if (!is_onstr(" 1", map[i][j]))
+			return (false);
+	i = -1;
+	while (map[++i])
+	{
+		j = 0;
+		while (is_spaces(map[i][j]))
+			j += 1;
+		if (map[i][j] != '1')
+			return (false);
+		j = get_line_last_idx(map[i]) - 1;
+		if (map[i][j] != '1')
+			return (false);
+	}
+	return (true);
+}
+
+bool	parse_map(char **map_part, t_data *this)
+{
+	if (!has_walls(map_part) || !valid_content(map_part)
+		|| !save_player_info(map_part, this))
+			return (false);
+	init_player_pov(this);
+	this->map_height = matrix_len(map_part);
+	return (true);
 }

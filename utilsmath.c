@@ -3,14 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   utilsmath.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:46:33 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/09/25 16:18:36 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/02 14:57:03 by pcocci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+size_t	matrix_len(char **matrix)
+{
+	size_t	i;
+
+	i = 0;
+	if (!matrix)
+		return (0);
+	while (matrix[i])
+		i += 1;
+	return (i);
+}
+
+bool	is_all_digits(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] >= '0' && str[i] <= '9'))
+			return (false);
+		i += 1;
+	}
+	return (true);
+}
+
+bool	fits_in_intrange(int n, int lowest, int highest)
+{
+	return (n >= lowest && n <= highest);
+}
 
 static int	ft_atoi_check_char(const char *str)
 {
