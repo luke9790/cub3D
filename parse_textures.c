@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 10:21:43 by pcocci            #+#    #+#             */
-/*   Updated: 2023/10/03 16:30:06 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/04 12:22:13 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static bool	assign_rgb(int *element_rgb, char **rgb)
 		element_rgb[i] = ft_atoi(rgb[i]);
 		if (!fits_in_intrange(element_rgb[i], 0, 255))
         {   
-            perror("RGB ou of range\n");
+            perror("RGB out of range\n");
 			return (false);
         }
 		i += 1;

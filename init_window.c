@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:01:20 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/03 13:07:40 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/04 12:16:55 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ bool load_img(void *mlx_ptr, t_image *texture, char **path)
 	return (true);
 }
 
-// si spiega da se 
-
 void	render_next_frame(t_data *box)
-{	
+{
 	ft_raycasting(box);
 	mlx_clear_window(box->mlx_ptr, box->win_ptr);
 	mlx_put_image_to_window(box->mlx_ptr, box->win_ptr, box->img.img_ptr, 0, 0);

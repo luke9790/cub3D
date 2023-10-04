@@ -3,14 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   window_loop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 09:44:28 by pcocci            #+#    #+#             */
-/*   Updated: 2023/09/29 13:46:12 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/04 12:18:07 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+/*
+con move player aggiorniamo i dati del player, "spostandolo" in base agli input.
+Renderizziamo il prossimo frame da mettere a schermo. (tutto il raycasting).
+*/
 
 int window_loop(t_data *box)
 {   
