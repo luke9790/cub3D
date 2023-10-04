@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+         #
+#    By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/20 10:08:45 by lmasetti          #+#    #+#              #
-#    Updated: 2023/10/02 17:46:51 by pcocci           ###   ########.fr        #
+#    Updated: 2023/10/04 12:30:09 by lmasetti         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cub3d
+NAME = cub3D
 SRCS = ft_split.c parse_textures.c main.c check_map.c  check_map2.c  init.c start.c utils.c utils2.c \
 	init_window.c handle_inputs.c createcolors.c utilsmath.c utilsminilibx.c \
 	raycasting.c pixels.c window_loop.c player_fov.c move.c utils3.c parse_wrap.c player_info.c
