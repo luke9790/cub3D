@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:40:50 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/04 16:00:49 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:44:22 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,36 +39,35 @@
 
 //EVENTS
 
-#define KEYPRESS 2
-#define KEIRELEASE 3
-#define DESTROY 17
+# define KEYPRESS 2
+# define KEIRELEASE 3
+# define DESTROY 17
 
 // KEYS
-#  define W 119
-#  define A 97
-#  define S 115
-#  define D 100
-#  define Q 113
-#  define E 101
-#  define R 114
-#  define UP 65362
-#  define DOWN 65364
-#  define LEFT 65361
-#  define RIGHT 65363
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define Q 113
+# define E 101
+# define R 114
+# define UP 65362
+# define DOWN 65364
+# define LEFT 65361
+# define RIGHT 65363
 
-#  define SPACE 32
+# define SPACE 32
 
-#  define ESC 65307
-#  define TAB 65289
-#  define SHIFT 65505
-#  define CTRL 65507
+# define ESC 65307
+# define TAB 65289
+# define SHIFT 65505
+# define CTRL 65507
 
 # define WALL '1'
 # define OPEN '0'
 
-#define MOVESPEED 0.02f
-#define MARGIN	0.05f // scaling factor che determina quanto si muove per frame o per input il player
-
+# define MOVESPEED 0.01f
+# define MARGIN	0.05f
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
@@ -78,18 +77,16 @@
 # define VALID_ELEMENT_SURROUNDING "01NSEW"
 # define POSSIBLE_PLAYER_CHARS "NSEW"
 
-
-typedef struct	s_image
+typedef struct s_image
 {
-	void		*img_ptr;   // Puntatore all'immagine
-	char		*addr;      // Puntatore all'area di memoria dei dati dei pixel
-	int			bits_per_pixel; // Numero di bit per ogni pixel (es. 32 bit)
-	int			line_length;    // Dimensione di una riga in byte
-	int			endian;     // Specifiche sull'ordinamento dei byte (endianess)
-	int			w;			// widht
-	int			h;			// height
+	void		*img_ptr;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+	int			w;
+	int			h;	
 }				t_image;
-
 
 typedef struct s_textures
 {
@@ -147,13 +144,12 @@ typedef struct s_player
 
 typedef struct s_map_check
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 	int	nbr_rows;
 	int	nbr_col;
 	int	flag;
-
-} t_map_checks ;
+}				t_map_checks;
 
 typedef struct s_data
 {
@@ -176,8 +172,8 @@ void			ft_start(t_data *box);
 void			ft_init_window(t_data *box);
 void			ft_raycasting(t_data *box);
 void			init_player_pov(t_data *box);
-void			set_player_info(t_player *player_info, int player_x, int player_y,
-		char orientation);
+void			set_player_info(t_player *player_info, int player_x,
+					int player_y, char orientation);
 int				ft_free_all(t_data *box);
 bool			rgb_len(char *);
 t_image			new_img(void *mlx_ptr);
@@ -231,7 +227,5 @@ unsigned int	ft_color_converter(int r, int g, int b);
 long			ft_atoi(const char *nptr);
 bool			fits_in_intrange(int n, int lowest, int highest);
 bool			is_all_digits(const char *str);
-//MAP
-void			draw_square(t_data *box,int x, int y, int size, int color);
 
 #endif

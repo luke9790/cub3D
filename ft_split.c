@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:11:00 by pcocci            #+#    #+#             */
-/*   Updated: 2023/10/02 11:15:42 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/11 14:27:19 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static char *ft_substr2(char *str, unsigned int start, size_t size)
+static char	*ft_substr2(char *str, unsigned int start, size_t size)
 {
 	size_t	len;
 	char	*sub;

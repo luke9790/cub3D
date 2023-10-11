@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:01:20 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/04 12:16:55 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/11 14:30:26 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 // si spiega da se // da mettere nel parse del file contenente la mappa etc.
 
-bool load_img(void *mlx_ptr, t_image *texture, char **path)
+bool	load_img(void *mlx_ptr, t_image *texture, char **path)
 {
-	int size;
+	int	size;
 
 	texture->img_ptr = mlx_xpm_file_to_image(mlx_ptr, path[1], &size, &size);
 	if (!texture->img_ptr)

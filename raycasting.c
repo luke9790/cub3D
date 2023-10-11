@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:43:39 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/04 17:00:19 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/11 15:57:55 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	point_rays(t_data *box, t_raycaster *rc)
 		rc->side_dist_x = (rc->map_x + 1.0f - box->player.x)
 			* rc->delta_dist_x;
 	}
-	if (rc->ray_dir_y > 0)
+	if (rc->ray_dir_y < 0)
 	{
 		rc->step_y = -1;
 		rc->side_dist_y = (box->player.y - rc->map_y) * rc->delta_dist_y;
@@ -96,7 +96,8 @@ void	point_rays(t_data *box, t_raycaster *rc)
 }
 
 void	find_distance_to_wall(char **map, t_raycaster *rc)
-{
+{	
+	(void)map;
 	while (!rc->hit)
 	{
 		if (rc->side_dist_x < rc->side_dist_y)
@@ -198,11 +199,6 @@ void find_wall_pixel(t_data *box, t_raycaster *rc)
 }
 
 
-
-
-
-
-
 void	ft_raycasting(t_data *box)
 {
     int x;
@@ -215,6 +211,10 @@ void	ft_raycasting(t_data *box)
 		init_rc(box, &rc, x);
 		point_rays(box, &rc);
 		find_distance_to_wall(box->parsed_map, &rc);
+		/*if (rc.hit == true)
+			printf("1\n");
+		if (rc.hit == false)
+			printf("2\n");*/
 		find_wall_height(&rc);
 		find_wall_pixel(box, &rc);
 		draw_vertical_line(box, &rc, x);

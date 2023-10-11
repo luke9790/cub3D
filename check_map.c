@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:32:37 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/02 18:33:32 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/11 14:18:25 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ bool	parse_map(char **map_part, t_data *this)
 {
 	if (!has_walls(map_part) || !valid_content(map_part)
 		|| !save_player_info(map_part, this))
-			return (false);
+		return (false);
 	init_player_pov(this);
 	this->map_height = matrix_len(map_part);
 	return (true);

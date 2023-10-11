@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   createcolors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:48:49 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/02 13:00:25 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/11 14:20:24 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,3 @@ unsigned int	ft_color_converter(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
 }
-
-
