@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:43:39 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/12 16:28:19 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:39:28 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,30 @@ void	find_wall_pixel(t_data *box, t_raycaster *rc)
 	rc->step = 1.0 * TEXTURE_HEIGHT / rc->line_height;
 	rc->tex_pos = (rc->draw_start - (WIN_HEIGHT / 2)
 			+ rc->line_height / 2) * rc->step;
+}
+
+static void	draw_vertical_line(t_data *box, t_raycaster *rc, int x)
+{
+	int	y;
+
+	y = -1;
+	while (++y < rc->draw_start)
+	{
+		put_pixel_in_image(&box->img, x, y, ft_color_converter(box->textures.sky_rgb[0], box->textures.sky_rgb[1], box->textures.sky_rgb[2]));
+	}
+	y = rc->draw_start;
+	while (y < rc->draw_end)
+	{
+		rc->tex_y = (int)rc->tex_pos & (TEXTURE_HEIGHT - 1);
+		rc->tex_pos += rc->step;
+		put_pixel_in_image(&box->img, x, y, get_color(box, rc));
+		y += 1;
+	}
+	while (y < WIN_HEIGHT)
+	{
+		put_pixel_in_image(&box->img, x, y, ft_color_converter(box->textures.floor_rgb[0], box->textures.floor_rgb[1], box->textures.floor_rgb[2]));
+		y += 1;
+	}
 }
 
 void	ft_raycasting(t_data *box)

@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:40:50 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/12 16:26:08 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/12 16:41:10 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,6 @@ void			rotate_left(t_data *box);
 void			speed_up(t_data *box);
 // RAYCASTING2
 void			init_rc(t_data *box, t_raycaster *rc, int x);
-static void		draw_vertical_line(t_data *box, t_raycaster *rc, int x);
 void			put_pixel_in_image(t_image *img, int x, int y, uint32_t color);
 t_image			new_img(void *mlx_ptr);
 
