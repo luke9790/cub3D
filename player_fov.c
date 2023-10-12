@@ -6,7 +6,7 @@
 /*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:34:00 by pcocci            #+#    #+#             */
-/*   Updated: 2023/09/29 15:16:35 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:16:42 by pcocci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,36 @@ void	set_player_info(t_player *player_info, int player_x, int player_y,
 	player_info->speed = MOVESPEED;
 }
 
-static void	north_pov(t_data *box)
-{
-	box->camera.plane_x = 0.66;
-	box->camera.plane_y = 0;
-	box->camera.dir_x = 0.0f;
-	box->camera.dir_y = 1.0f;
-}
-
-static void	south_pov(t_data *box)
-{
-	box->camera.plane_x = -0.66;
-	box->camera.plane_y = 0;
-	box->camera.dir_x = 0.0f;
-	box->camera.dir_y = -1.0f;
-}
-
 static void	east_pov(t_data *box)
 {
 	box->camera.plane_x = 0;
-	box->camera.plane_y = -0.66;
-	box->camera.dir_x = 1.0f;
-	box->camera.dir_y = 0.0f;
+	box->camera.plane_y = 0.66;
+	box->camera.dir_x = -1;
+	box->camera.dir_y = 0;
 }
 
 static void	west_pov(t_data *box)
 {
 	box->camera.plane_x = 0;
-	box->camera.plane_y = 0.66;
-	box->camera.dir_x = -1.0f;
-	box->camera.dir_y = 0.0f;
+	box->camera.plane_y = -0.66;
+	box->camera.dir_x = 1;
+	box->camera.dir_y = 0;
+}
+
+static void	south_pov(t_data *box)
+{
+	box->camera.plane_x = 0.66;
+	box->camera.plane_y = 0;
+	box->camera.dir_x = 0;
+	box->camera.dir_y = 1;
+}
+
+static void	north_pov(t_data *box)
+{
+	box->camera.plane_x = -0.66;
+	box->camera.plane_y = 0;
+	box->camera.dir_x = 0;
+	box->camera.dir_y = -1;
 }
 
 void	init_player_pov(t_data *box)

@@ -6,7 +6,7 @@
 /*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:43:27 by pcocci            #+#    #+#             */
-/*   Updated: 2023/10/03 16:24:25 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/12 14:37:07 by pcocci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void    tex_error(t_data *box, int fd)
         free(to_free);
         to_free = get_next_line(fd);
     }
+    free(to_free);
     close(fd);
     ft_perror_exit("Error\nFailed loading textures or rgb\n");
 }
@@ -33,7 +34,16 @@ void    map_error(t_data *box, char **map_part, int fd)
         free_matrix(map_part);
     ft_free_all(box);
     free(get_next_line(fd));
-    ft_perror_exit("Error\nFailed loading map\n");
+    printf("Error\nFailed loading map\n");
+    exit(1);
+}
+
+void    error_permission(t_data *box)
+{
+    mlx_destroy_window(box->mlx_ptr, box->win_ptr);
+    mlx_destroy_display(box->mlx_ptr);
+    free(box->mlx_ptr);
+    ft_perror_exit("Error");
 }
 
 void    parse_tex_colors(t_data *box, char *file)
@@ -43,6 +53,12 @@ void    parse_tex_colors(t_data *box, char *file)
     char    **map_part;
 
     fd = open(file, O_RDONLY);
+    if (fd == -1)
+        error_permission(box);
+    if (scene_is_empty(fd) == 1)
+    {
+        error_permission(box);
+    }
     textures = ft_textures(fd);
     if (!parse_textures(box, textures))
         tex_error(box, fd);

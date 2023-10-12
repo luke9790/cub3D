@@ -6,7 +6,7 @@
 /*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:13:48 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/02 18:39:08 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/12 12:15:35 by pcocci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ char	**get_map(char *file_name, int fd)
 		i++;
 	}
 	map[i] = NULL;
-	free(get_next_line(fd));
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 	return (map);
 }

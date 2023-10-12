@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:32:37 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/11 14:18:25 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/12 13:37:23 by pcocci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,7 @@ static bool	valid_content(char **map_part)
 		{
 			if (is_onstr(VALID_INSIDE_MAP, map_part[i][j])
 				&& !valid_surroundings(map_part, i, j))
-				return (false);
-			j++;
-		}
-		while (map_part[i][j])
-		{
-			if (map_part[i][j] != '1')
-				return (false);
+					return(false);			
 			j++;
 		}
 		i++;
@@ -94,8 +88,11 @@ static bool	has_walls(char **map)
 
 bool	parse_map(char **map_part, t_data *this)
 {
-	if (!has_walls(map_part) || !valid_content(map_part)
-		|| !save_player_info(map_part, this))
+	if (!has_walls(map_part))
+		return (false);
+	if (!valid_content(map_part))
+		return (false);
+	if (!save_player_info(map_part, this))
 		return (false);
 	init_player_pov(this);
 	this->map_height = matrix_len(map_part);

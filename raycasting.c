@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:43:39 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/11 15:57:55 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/12 11:26:36 by pcocci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	draw_vertical_line(t_data *box, t_raycaster *rc, int x)
 		put_pixel_in_image(&box->img, x, y, get_color(box, rc));
 		y += 1;
 	}
-	y = rc->draw_end;
 	while (y < WIN_HEIGHT)
 	{
 		put_pixel_in_image(&box->img, x, y, ft_color_converter(box->textures.floor_rgb[0], box->textures.floor_rgb[1], box->textures.floor_rgb[2]));
@@ -96,8 +95,7 @@ void	point_rays(t_data *box, t_raycaster *rc)
 }
 
 void	find_distance_to_wall(char **map, t_raycaster *rc)
-{	
-	(void)map;
+{
 	while (!rc->hit)
 	{
 		if (rc->side_dist_x < rc->side_dist_y)
@@ -192,7 +190,6 @@ void find_wall_pixel(t_data *box, t_raycaster *rc)
     {
         rc->tex_x = TEXTURE_WIDTH - rc->tex_x - 1;
     }
-
     rc->tex_x = abs(rc->tex_x);
     rc->step = 1.0 * TEXTURE_HEIGHT / rc->line_height;
     rc->tex_pos = (rc->draw_start - (WIN_HEIGHT / 2) + rc->line_height / 2) * rc->step;
@@ -204,17 +201,13 @@ void	ft_raycasting(t_data *box)
     int x;
     t_raycaster rc;
 
-    box->img = new_img(box->mlx_ptr);
+	box->img = new_img(box->mlx_ptr);
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		init_rc(box, &rc, x);
 		point_rays(box, &rc);
 		find_distance_to_wall(box->parsed_map, &rc);
-		/*if (rc.hit == true)
-			printf("1\n");
-		if (rc.hit == false)
-			printf("2\n");*/
 		find_wall_height(&rc);
 		find_wall_pixel(box, &rc);
 		draw_vertical_line(box, &rc, x);

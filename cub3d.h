@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:40:50 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/11 15:44:22 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/12 14:36:52 by pcocci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@
 # define WALL '1'
 # define OPEN '0'
 
-# define MOVESPEED 0.01f
+# define MOVESPEED 0.022f
 # define MARGIN	0.05f
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
@@ -165,6 +165,7 @@ typedef struct s_data
 }				t_data;
 
 //BASE FUNCTIONS
+int			scene_is_empty(int fd);
 void			ft_init_struct(t_data *box);
 void			ft_create_map(t_data *box, char *map);
 void			ft_check_map(t_data *box);
@@ -176,7 +177,9 @@ void			set_player_info(t_player *player_info, int player_x,
 					int player_y, char orientation);
 int				ft_free_all(t_data *box);
 bool			rgb_len(char *);
+void			put_pixel_in_image(t_image *img, int x, int y, uint32_t color);
 t_image			new_img(void *mlx_ptr);
+void    		ground_and_sky(t_data *box);
 // PARSE
 char			**ft_textures(int fd);
 bool			parse_textures(t_data *box, char **textures);
