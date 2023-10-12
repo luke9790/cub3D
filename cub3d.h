@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:40:50 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/12 14:36:52 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:36:28 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ typedef struct s_data
 }				t_data;
 
 //BASE FUNCTIONS
-int			scene_is_empty(int fd);
+int				scene_is_empty(char *file);
 void			ft_init_struct(t_data *box);
 void			ft_create_map(t_data *box, char *map);
 void			ft_check_map(t_data *box);
@@ -176,10 +176,10 @@ void			init_player_pov(t_data *box);
 void			set_player_info(t_player *player_info, int player_x,
 					int player_y, char orientation);
 int				ft_free_all(t_data *box);
-bool			rgb_len(char *);
+bool			rgb_len(char *av);
 void			put_pixel_in_image(t_image *img, int x, int y, uint32_t color);
 t_image			new_img(void *mlx_ptr);
-void    		ground_and_sky(t_data *box);
+void			ground_and_sky(t_data *box);
 // PARSE
 char			**ft_textures(int fd);
 bool			parse_textures(t_data *box, char **textures);
@@ -225,10 +225,13 @@ int				window_loop(t_data *box);
 bool			load_img(void *mlx_ptr, t_image *texture, char **path);
 uint32_t		get_color(t_data *box, t_raycaster *rc);
 unsigned int	ft_color_converter(int r, int g, int b);
-/* static unsigned int	ft_color_converter(int r, int g, int b); */
 // UTILSMATH
 long			ft_atoi(const char *nptr);
 bool			fits_in_intrange(int n, int lowest, int highest);
 bool			is_all_digits(const char *str);
+// MOVE2
+void			rotate_right(t_data *box);
+void			rotate_left(t_data *box);
+void			speed_up(t_data *box);
 
 #endif

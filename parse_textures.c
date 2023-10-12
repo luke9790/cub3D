@@ -6,36 +6,36 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 10:21:43 by pcocci            #+#    #+#             */
-/*   Updated: 2023/10/04 12:22:13 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/12 15:45:07 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-char **ft_textures(int fd)
+char	**ft_textures(int fd)
 {
-    char    **mat_textures;
-    char    *to_free;
-    size_t  i;
-    char    *line;
+	char	**mat_textures;
+	char	*to_free;
+	size_t	i;
+	char	*line;
 
-    mat_textures = malloc((7) * sizeof(char *));
-    i = 0;
-    while (i < 6)
-    {
-        line = trim_free(get_next_line(fd), "\n");
-        if (only_spaces(line))
-        {
-            free(line);
-            continue;
-        }
-        mat_textures[i] = line;
-        i++;
-    }
-    mat_textures[i] = NULL;
-    to_free = get_next_line(fd);
-    free(to_free);
-    return (mat_textures);
+	mat_textures = malloc((7) * sizeof(char *));
+	i = 0;
+	while (i < 6)
+	{
+		line = trim_free(get_next_line(fd), "\n");
+		if (only_spaces(line))
+		{
+			free(line);
+			continue ;
+		}
+		mat_textures[i] = line;
+		i++;
+	}
+	mat_textures[i] = NULL;
+	to_free = get_next_line(fd);
+	free(to_free);
+	return (mat_textures);
 }
 
 static bool	assign_rgb(int *element_rgb, char **rgb)
@@ -51,20 +51,20 @@ static bool	assign_rgb(int *element_rgb, char **rgb)
 			return (false);
 		element_rgb[i] = ft_atoi(rgb[i]);
 		if (!fits_in_intrange(element_rgb[i], 0, 255))
-        {   
-            perror("RGB out of range\n");
+		{
+			perror("RGB out of range\n");
 			return (false);
-        }
+		}
 		i += 1;
 	}
 	return (true);
 }
 
-static bool parse_rgb(char *lettera, int *rgb_arr, char **map)
+static bool	parse_rgb(char *lettera, int *rgb_arr, char **map)
 {
-    int     i;
-    bool    value;
-    char	**temp;
+	int		i;
+	bool	value;
+	char	**temp;
 	char	**rgb;
 
 	i = -1;
@@ -73,14 +73,9 @@ static bool parse_rgb(char *lettera, int *rgb_arr, char **map)
 	{
 		temp = ft_split(map[i], ' ');
 		if (streq(lettera, temp[0]))
-		{   
-            
-			if (matrix_len(temp) != 2)  //|| !rgb_len(temp[0]) || !rgb_len(temp[1]))
-            {   
-                //free_matrix(temp);
-                perror("Error \n Wrong Colors Attributes\n");
-				//return (false);
-            }
+		{
+			if (matrix_len(temp) != 2)
+				perror("Error \n Wrong Colors Attributes\n");
 			rgb = ft_split(temp[1], ',');
 			if (value == true && !assign_rgb(rgb_arr, rgb))
 				value = false;
@@ -89,58 +84,58 @@ static bool parse_rgb(char *lettera, int *rgb_arr, char **map)
 			return (value);
 		}
 		free_matrix(temp);
-	}	
+	}
 	return (false);
 }
 
-static bool parse_coordinates(char *coor, void *mlx_ptr, t_image *tex, char **map)
-{   
-    t_image texture;
-    int i;
-    char    **tmp;
+static bool	parse_coordinates(char *coor, void *mlx_ptr, t_image *tex, char **map)
+{
+	t_image	texture;
+	int		i;
+	char	**tmp;
 
-    i = 0;
-    while (i < 6)
-    {
-        tmp = ft_split(map[i], ' ');
-        if (streq(coor, tmp[0]))
-        {
-            if (matrix_len(tmp) != 2)
-            {
-                free_matrix(tmp);
-                return(write(1, "Error \n Invalid Attributes", 27), false);
-            }
-            if (!load_img(mlx_ptr, &texture, tmp))
-            {   
-                free_matrix(tmp);
-                return (false);
-            }
-            free_matrix(tmp);
-            *tex = texture;
-            return (true);
-        }
-        i++;
-        free_matrix(tmp);
-    }
-    return (false);
+	i = 0;
+	while (i < 6)
+	{
+		tmp = ft_split(map[i], ' ');
+		if (streq(coor, tmp[0]))
+		{
+			if (matrix_len(tmp) != 2)
+			{
+				free_matrix(tmp);
+				return (write(1, "Error \n Invalid Attributes", 27), false);
+			}
+			if (!load_img(mlx_ptr, &texture, tmp))
+			{
+				free_matrix(tmp);
+				return (false);
+			}
+			free_matrix(tmp);
+			*tex = texture;
+			return (true);
+		}
+		i++;
+		free_matrix(tmp);
+	}
+	return (false);
 }
 
-bool    parse_textures(t_data *box, char **textures)
+bool	parse_textures(t_data *box, char **textures)
 {
-    bool    value;
+	bool	value;
 
-    value = false;
-    if (parse_coordinates("NO", box->mlx_ptr, 
-            &box->textures.north, textures)
-        && parse_coordinates("SO", box->mlx_ptr, 
-            &box->textures.south, textures)
-        && parse_coordinates("EA", box->mlx_ptr, 
-            &box->textures.east, textures)
-        && parse_coordinates("WE", box->mlx_ptr, 
-            &box->textures.west, textures)
-        && parse_rgb("C", box->textures.sky_rgb, textures)
-        && parse_rgb("F", box->textures.floor_rgb, textures))
-        value = true;
-    free_matrix(textures);
-    return (value);
+	value = false;
+	if (parse_coordinates("NO", box->mlx_ptr,
+			&box->textures.north, textures)
+		&& parse_coordinates("SO", box->mlx_ptr,
+			&box->textures.south, textures)
+		&& parse_coordinates("EA", box->mlx_ptr,
+			&box->textures.east, textures)
+		&& parse_coordinates("WE", box->mlx_ptr,
+			&box->textures.west, textures)
+		&& parse_rgb("C", box->textures.sky_rgb, textures)
+		&& parse_rgb("F", box->textures.floor_rgb, textures))
+		value = true;
+	free_matrix(textures);
+	return (value);
 }

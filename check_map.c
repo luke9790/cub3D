@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 10:32:37 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/12 13:37:23 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:25:05 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static bool	valid_content(char **map_part)
 		{
 			if (is_onstr(VALID_INSIDE_MAP, map_part[i][j])
 				&& !valid_surroundings(map_part, i, j))
-					return(false);			
+				return (false);
 			j++;
 		}
 		i++;

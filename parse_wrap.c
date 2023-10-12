@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_wrap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 11:43:27 by pcocci            #+#    #+#             */
-/*   Updated: 2023/10/12 14:37:07 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/12 15:13:53 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void    parse_tex_colors(t_data *box, char *file)
     fd = open(file, O_RDONLY);
     if (fd == -1)
         error_permission(box);
-    if (scene_is_empty(fd) == 1)
+    if (scene_is_empty(file) == 1)
     {
         error_permission(box);
     }
