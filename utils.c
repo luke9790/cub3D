@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:54:16 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/02 16:42:38 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/12 16:31:43 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,33 @@ void	ft_perror_exit(char *str)
 {
 	perror(str);
 	exit (1);
+}
+
+char	*ft_strncpy(char *str, int start)
+{
+	char	*dst;
+	int		i;
+
+	i = 0;
+	dst = (char *) malloc(sizeof(char) * (ft_strlen(str) - start));
+	if (!dst)
+		perror("Error\n");
+	while (start < (int)ft_strlen(str) - 1)
+		dst[i++] = str[start++];
+	dst[i] = '\0';
+	return (dst);
+}
+
+int	ft_strncmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }

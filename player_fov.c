@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_fov.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 12:34:00 by pcocci            #+#    #+#             */
-/*   Updated: 2023/10/12 14:16:42 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/12 16:22:24 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,15 @@ static void	south_pov(t_data *box)
 	box->camera.dir_y = 1;
 }
 
-static void	north_pov(t_data *box)
-{
-	box->camera.plane_x = -0.66;
-	box->camera.plane_y = 0;
-	box->camera.dir_x = 0;
-	box->camera.dir_y = -1;
-}
-
 void	init_player_pov(t_data *box)
 {
 	if (box->player.orientation == NORTH)
-		north_pov(box);
+	{
+		box->camera.plane_x = -0.66;
+		box->camera.plane_y = 0;
+		box->camera.dir_x = 0;
+		box->camera.dir_y = -1;
+	}
 	else if (box->player.orientation == SOUTH)
 		south_pov(box);
 	else if (box->player.orientation == WEST)
