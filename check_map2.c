@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 09:45:51 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/13 14:34:31 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:14:36 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,3 @@ bool	rgb_len(char *av)
 	free_matrix(tmp);
 	return (true);
 }
-
-int	find_index_tex();

@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 10:21:43 by pcocci            #+#    #+#             */
-/*   Updated: 2023/10/13 15:02:32 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:14:04 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,12 @@ static bool	parse_coord(char *coor, void *mlx_ptr, t_image *tex, char **map)
 	t_image	texture;
 	int		i;
 	char	**tmp;
-	int len;
+	int		len;
 
-	i = 0;
 	len = matrix_len(map);
 	i = 0;
 	while (i < len)
-	{	
-		//tmp = ft_split(map[i], '\t');
+	{
 		tmp = ft_split(map[i], ' ');
 		if (streq(coor, tmp[0]))
 		{
