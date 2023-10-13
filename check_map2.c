@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 09:45:51 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/12 15:26:35 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/13 12:10:54 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,50 @@
 
 int	custom_isalnum(char c)
 {
-	return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z')
+		|| (c >= 'a' && c <= 'z'))
+		return (1);
+	else
+		return (0);
 }
+
+int	is_file_empty(int fd)
+{
+	char	buffer[BUFFER_SIZE];
+	int		is_empty;
+	ssize_t	bytesread;
+	ssize_t	i;
+
+	is_empty = 1;
+	while (1)
+	{
+		bytesread = read(fd, buffer, BUFFER_SIZE);
+		if (bytesread <= 0)
+			break ;
+		i = 0;
+		while (i < bytesread && is_empty)
+		{
+			if (custom_isalnum(buffer[i]))
+				is_empty = 0;
+			i++;
+		}
+		if (!is_empty)
+			break ;
+	}
+	return (is_empty);
+}
+
 int	scene_is_empty(char *file)
 {
-	int is_empty = 1; // Assume it's empty until we find a non-empty line.
+	int	fd;
+	int	result;
 
-	FILE *file_ptr = fopen(file, "r");
-	if (file_ptr == NULL)
-		return is_empty;
-
-	char *line = NULL;
-	size_t len = 0;
-	ssize_t read;
-
-	// Iterate through the file using get_next_line.
-	while ((read = getline(&line, &len, file_ptr)) != -1)
-	{
-		int i = 0;
-		while (i < read) {
-			if (custom_isalnum(line[i]))
-			{
-                is_empty = 0; // Found an alphanumeric character, so it's not empty.
-                break;
-            }
-            i++;
-        }
-        if (!is_empty)
-		{
-            free(line);
-            fclose(file_ptr);
-            return 0; // Not empty, return 0.
-        }
-    }
-
-    free(line);
-    fclose(file_ptr);
-    return is_empty; // If the loop completes without finding alphanumeric characters, it's empty.
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		return (1);
+	result = is_file_empty(fd);
+	close(fd);
+	return (result);
 }
 
 bool	rgb_len(char *av)

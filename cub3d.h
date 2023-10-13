@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:40:50 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/12 16:41:10 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:06:54 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,5 +237,6 @@ void			speed_up(t_data *box);
 void			init_rc(t_data *box, t_raycaster *rc, int x);
 void			put_pixel_in_image(t_image *img, int x, int y, uint32_t color);
 t_image			new_img(void *mlx_ptr);
+void			point_rays(t_data *box, t_raycaster *rc);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 10:21:43 by pcocci            #+#    #+#             */
-/*   Updated: 2023/10/12 15:45:07 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/13 12:14:47 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static bool	parse_rgb(char *lettera, int *rgb_arr, char **map)
 	return (false);
 }
 
-static bool	parse_coordinates(char *coor, void *mlx_ptr, t_image *tex, char **map)
+static bool	parse_coord(char *coor, void *mlx_ptr, t_image *tex, char **map)
 {
 	t_image	texture;
 	int		i;
@@ -100,12 +100,7 @@ static bool	parse_coordinates(char *coor, void *mlx_ptr, t_image *tex, char **ma
 		tmp = ft_split(map[i], ' ');
 		if (streq(coor, tmp[0]))
 		{
-			if (matrix_len(tmp) != 2)
-			{
-				free_matrix(tmp);
-				return (write(1, "Error \n Invalid Attributes", 27), false);
-			}
-			if (!load_img(mlx_ptr, &texture, tmp))
+			if (matrix_len(tmp) != 2 || !load_img(mlx_ptr, &texture, tmp))
 			{
 				free_matrix(tmp);
 				return (false);
@@ -125,13 +120,13 @@ bool	parse_textures(t_data *box, char **textures)
 	bool	value;
 
 	value = false;
-	if (parse_coordinates("NO", box->mlx_ptr,
+	if (parse_coord("NO", box->mlx_ptr,
 			&box->textures.north, textures)
-		&& parse_coordinates("SO", box->mlx_ptr,
+		&& parse_coord("SO", box->mlx_ptr,
 			&box->textures.south, textures)
-		&& parse_coordinates("EA", box->mlx_ptr,
+		&& parse_coord("EA", box->mlx_ptr,
 			&box->textures.east, textures)
-		&& parse_coordinates("WE", box->mlx_ptr,
+		&& parse_coord("WE", box->mlx_ptr,
 			&box->textures.west, textures)
 		&& parse_rgb("C", box->textures.sky_rgb, textures)
 		&& parse_rgb("F", box->textures.floor_rgb, textures))

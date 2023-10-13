@@ -6,37 +6,11 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:43:39 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/12 16:39:28 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:08:21 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	point_rays(t_data *box, t_raycaster *rc)
-{
-	if (rc->ray_dir_x < 0)
-	{
-		rc->step_x = -1;
-		rc->side_dist_x = (box->player.x - rc->map_x) * rc->delta_dist_x;
-	}
-	else
-	{
-		rc->step_x = 1;
-		rc->side_dist_x = (rc->map_x + 1.0f - box->player.x)
-			* rc->delta_dist_x;
-	}
-	if (rc->ray_dir_y < 0)
-	{
-		rc->step_y = -1;
-		rc->side_dist_y = (box->player.y - rc->map_y) * rc->delta_dist_y;
-	}
-	else
-	{
-		rc->step_y = 1;
-		rc->side_dist_y = (rc->map_y + 1.0f - box->player.y)
-			* rc->delta_dist_y;
-	}
-}
 
 void	find_distance_to_wall(char **map, t_raycaster *rc)
 {
@@ -103,7 +77,9 @@ static void	draw_vertical_line(t_data *box, t_raycaster *rc, int x)
 	y = -1;
 	while (++y < rc->draw_start)
 	{
-		put_pixel_in_image(&box->img, x, y, ft_color_converter(box->textures.sky_rgb[0], box->textures.sky_rgb[1], box->textures.sky_rgb[2]));
+		put_pixel_in_image(&box->img, x, y,
+			ft_color_converter(box->textures.sky_rgb[0],
+				box->textures.sky_rgb[1], box->textures.sky_rgb[2]));
 	}
 	y = rc->draw_start;
 	while (y < rc->draw_end)
@@ -115,7 +91,9 @@ static void	draw_vertical_line(t_data *box, t_raycaster *rc, int x)
 	}
 	while (y < WIN_HEIGHT)
 	{
-		put_pixel_in_image(&box->img, x, y, ft_color_converter(box->textures.floor_rgb[0], box->textures.floor_rgb[1], box->textures.floor_rgb[2]));
+		put_pixel_in_image(&box->img, x, y,
+			ft_color_converter(box->textures.floor_rgb[0],
+				box->textures.floor_rgb[1], box->textures.floor_rgb[2]));
 		y += 1;
 	}
 }

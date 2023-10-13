@@ -6,11 +6,37 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 09:43:39 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/12 16:41:22 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/13 11:06:33 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	point_rays(t_data *box, t_raycaster *rc)
+{
+	if (rc->ray_dir_x < 0)
+	{
+		rc->step_x = -1;
+		rc->side_dist_x = (box->player.x - rc->map_x) * rc->delta_dist_x;
+	}
+	else
+	{
+		rc->step_x = 1;
+		rc->side_dist_x = (rc->map_x + 1.0f - box->player.x)
+			* rc->delta_dist_x;
+	}
+	if (rc->ray_dir_y < 0)
+	{
+		rc->step_y = -1;
+		rc->side_dist_y = (box->player.y - rc->map_y) * rc->delta_dist_y;
+	}
+	else
+	{
+		rc->step_y = 1;
+		rc->side_dist_y = (rc->map_y + 1.0f - box->player.y)
+			* rc->delta_dist_y;
+	}
+}
 
 t_image	new_img(void *mlx_ptr)
 {
