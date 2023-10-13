@@ -6,7 +6,7 @@
 /*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 09:40:50 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/13 11:06:54 by lmasetti         ###   ########.fr       */
+/*   Updated: 2023/10/13 14:56:25 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ typedef struct s_data
 }				t_data;
 
 //BASE FUNCTIONS
+char 			**super_split(const char *str, const char *delimiters, int *count);
 int				scene_is_empty(char *file);
 void			ft_init_struct(t_data *box);
 void			ft_create_map(t_data *box, char *map);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcocci <pcocci@student.42firenze.it>       +#+  +:+       +#+        */
+/*   By: lmasetti <lmasetti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 10:13:48 by lmasetti          #+#    #+#             */
-/*   Updated: 2023/10/12 12:15:35 by pcocci           ###   ########.fr       */
+/*   Updated: 2023/10/13 15:07:30 by lmasetti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ static size_t	get_nbr_map_lines(char *file_name)
 	i = 0;
 	count = 0;
 	line = get_next_line(scene_fd);
-	while (i < 6)
-	{
+		if (!only_spaces(line))
+			i += 1;
+	while (i < 7)
+	{	
 		free(line);
 		line = get_next_line(scene_fd);
 		if (!only_spaces(line))
 			i += 1;
 	}
 	while (line)
-	{
+	{	
 		if (!only_spaces(line))
 			count += 1;
 		free(line);

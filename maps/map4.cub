@@ -1,12 +1,63 @@
-NO ./images/north.xpm
 
-SO ./images/south.xpm
 
-WE ./images/west.xpm
 
-EA ./images/east.xpm
+
+
+
+
+
+
+
+
+
+NO	             ./images/north.xpm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SO	./images/south.xpm
+
+
+
+
+
+
+
+
+
+
+
+WE	./images/west.xpm
+
+
+
+
+
+
+
+
+
+
+
+EA	./images/east.xpm
+
+
+
+
 
 F 238,232,170
+
 C 135,206,250
 
 111111111111111111111111
